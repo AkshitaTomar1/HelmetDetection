@@ -3,10 +3,6 @@ from torchvision.utils import draw_bounding_boxes
 from torchvision.transforms import ToPILImage
 
 def get_prediction(model, image, threshold=0.8, device=torch.device("cpu")):
-    """
-    Runs inference on a single image and filters predictions based on the confidence threshold.
-    Also removes very small bounding boxes.
-    """
     model.eval()
     image = image.to(device)
 
@@ -19,7 +15,6 @@ def get_prediction(model, image, threshold=0.8, device=torch.device("cpu")):
     labels = prediction['labels'][keep]
     scores = prediction['scores'][keep]
 
-    # Filter out very small boxes
     filtered_boxes = []
     filtered_labels = []
     filtered_scores = []
@@ -28,7 +23,7 @@ def get_prediction(model, image, threshold=0.8, device=torch.device("cpu")):
         xmin, ymin, xmax, ymax = box
         width = xmax - xmin
         height = ymax - ymin
-        if width * height > 500:  # keep only boxes with reasonable size
+        if width * height > 500:
             filtered_boxes.append(box)
             filtered_labels.append(labels[i])
             filtered_scores.append(scores[i])
@@ -40,15 +35,18 @@ def get_prediction(model, image, threshold=0.8, device=torch.device("cpu")):
     }
 
 def draw_boxes(image, prediction, class_names):
-    """
-    Draws bounding boxes and class labels on the image.
-    """
     if image.max() <= 1.0:
         image = (image * 255).byte()
     else:
         image = image.byte()
 
-    labels = [class_names[i] for i in prediction['labels']]
+    labels = []
+    for lbl in prediction['labels']:
+        label_idx = lbl.item()
+        if label_idx >= len(class_names):
+            labels.append("Unknown")
+        else:
+            labels.append(class_names[label_idx])
 
     img_with_boxes = draw_bounding_boxes(
         image,

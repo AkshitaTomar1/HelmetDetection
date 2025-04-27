@@ -8,8 +8,12 @@ from inference import get_prediction, draw_boxes
 model = torch.load("model.pt", map_location=torch.device('cpu'))
 model.eval()
 
-# Define your class names based on your training
-class_names = ["Helmet", "No Helmet"]
+# Define class names properly (3 classes)
+class_names = [
+    "rider-helmet-bike",  # ID 0
+    "With Helmet",        # ID 1
+    "Without Helmet"      # ID 2
+]
 
 st.title("🛡️ Helmet Detection App")
 st.write("Upload an image to check for helmet detection.")
@@ -23,7 +27,7 @@ if uploaded_file is not None:
 
     # Preprocess
     transform = T.Compose([
-        T.Resize((600, 600)),
+        T.Resize((600, 600)),  # Optionally: use Resize + CenterCrop to preserve aspect ratio better
         T.ToTensor()
     ])
     image_tensor = transform(image)
