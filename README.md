@@ -1,4 +1,5 @@
 🛡️ Helmet Detection Project
+
 🚀 Project Overview
 This project focuses on detecting whether riders are wearing helmets using deep learning and computer vision. A Faster R-CNN model with ResNet-50 FPN backbone is trained and deployed using Streamlit for an interactive web application.
 
@@ -42,22 +43,16 @@ The model is fine-tuned for 3 classes and trained using custom helmet detection 
 📸 How to Run Locally
 Clone the Repository
 
-bash
-Copy
-Edit
+
 git clone https://github.com/AkshitaTomar1/HelmetDetection.git
 cd HelmetDetection
 Install Requirements
 
-bash
-Copy
-Edit
+
 pip install -r requirements.txt
 Run the App
 
-bash
-Copy
-Edit
+
 streamlit run app.py
 Upload an Image
 Upload an image and get predictions with bounding boxes and class labels.
