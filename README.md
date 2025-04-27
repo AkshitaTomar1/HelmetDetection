@@ -34,14 +34,14 @@ The model is fine-tuned for 3 classes and trained using custom helmet detection 
 ```bash
 git clone https://github.com/AkshitaTomar1/HelmetDetection.git
 cd HelmetDetection
-```bash 
+ 
 ### Install Requirements
 ```bash
 pip install -r requirements.txt
-###Run the App
-bash
-Copy
-Edit
+
+### Run the App
+```bash
 streamlit run app.py
+
 Upload an Image
 Upload an image and get predictions with bounding boxes and class labels.
