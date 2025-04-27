@@ -10,16 +10,16 @@ model = torch.load("model.pt", map_location=torch.device('cpu'))
 model.eval()
 
 
-""""
-model = torchvision.models.detection.fasterrcnn_resnet50_fpn(weights=None)
-in_features = model.roi_heads.box_predictor.cls_score.in_features
-model.roi_heads.box_predictor = torchvision.models.detection.faster_rcnn.FastRCNNPredictor(in_features, num_classes=3)
+
+#model = torchvision.models.detection.fasterrcnn_resnet50_fpn(weights=None)
+#in_features = model.roi_heads.box_predictor.cls_score.in_features
+#model.roi_heads.box_predictor = torchvision.models.detection.faster_rcnn.FastRCNNPredictor(in_features, num_classes=3)
 
 # Load the trained weights
-model.load_state_dict(torch.load("model_weights.pth", map_location=torch.device('cpu')))
-model.eval()
+#model.load_state_dict(torch.load("model_weights.pth", map_location=torch.device('cpu')))
+#model.eval()
 
-"""
+
 
 
 # Define class names properly (3 classes)
