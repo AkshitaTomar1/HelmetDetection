@@ -5,8 +5,19 @@ from torchvision import transforms as T
 from inference import get_prediction, draw_boxes
 
 # Load your trained model
-model = torch.load("model.pt", map_location=torch.device('cpu'))
+#model = torch.load("model.pt", map_location=torch.device('cpu'))
+#model.eval()
+
+
+
+# Recreate the model with correct number of classes
+model = torchvision.models.detection.fasterrcnn_resnet50_fpn(weights=None, num_classes=3)
+
+# Load the trained weights
+model.load_state_dict(torch.load("model_weights.pth", map_location=torch.device('cpu')))
 model.eval()
+
+
 
 # Define class names properly (3 classes)
 class_names = [
